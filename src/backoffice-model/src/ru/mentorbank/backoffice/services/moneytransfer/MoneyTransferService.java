@@ -5,5 +5,5 @@ import ru.mentorbank.backoffice.services.moneytransfer.exceptions.TransferExcept
 
 public interface MoneyTransferService {
 
-	public void transfer(TransferRequest request) throws TransferException;
+	public void transfer(TransferRequest request) throws TransferException, OperationDaoException;
 }
