@@ -11,12 +11,15 @@ public class StopListServiceStub implements StopListService {
 	public static final String INN_FOR_OK_STATUS = "1111111111111";
 	public static final String INN_FOR_STOP_STATUS = "22222222222222";
 	public static final String INN_FOR_ASKSECURITY_STATUS = "33333333333333";
-
+	
+	public static final String DOC_SERIES_FOR_OK_STATUS = "1111111111111";
+	public static final String DOC_SERIES_FOR_STOP_STATUS = "22222222222222";
+	public static final String DOC_SERIES_FOR_ASKSECURITY_STATUS = "33333333333333";
 	@Override
 	public StopListInfo getJuridicalStopListInfo(
 			JuridicalStopListRequest request) {
 		StopListInfo stopListInfo = new StopListInfo();
-		stopListInfo.setComment("Комментарий");
+		stopListInfo.setComment("РљРѕРјРјРµРЅС‚Р°СЂРёР№");
 		if (INN_FOR_OK_STATUS.equals(request.getInn())){			
 			stopListInfo.setStatus(StopListStatus.OK);
 		} else if (INN_FOR_STOP_STATUS.equals(request.getInn())) {
@@ -29,8 +32,17 @@ public class StopListServiceStub implements StopListService {
 
 	@Override
 	public StopListInfo getPhysicalStopListInfo(PhysicalStopListRequest request) {
-		//TODO: Реализовать
-		return null;
+		//TODO: Р РµР°Р»РёР·РѕРІР°С‚СЊ
+		 StopListInfo stopListInfo = new StopListInfo();
+	   	 stopListInfo.setComment("");
+	   	 if ((DOC_SERIES_FOR_OK_STATUS.equals(request.getDocumentSeries()))) {
+	   	 stopListInfo.setStatus(StopListStatus.OK);
+	   	 } else if ((DOC_SERIES_FOR_STOP_STATUS.equals(request.getDocumentSeries()))) {
+	   	 stopListInfo.setStatus(StopListStatus.STOP);
+	   	 } else {
+	   	 stopListInfo.setStatus(StopListStatus.ASKSECURITY);
+	   	 }
+	   	 return stopListInfo;
 	}
 
 }
