@@ -34,7 +34,7 @@ public class StopListServiceStub implements StopListService {
 	public StopListInfo getPhysicalStopListInfo(PhysicalStopListRequest request) {
 		//TODO: Реализовать
 		 StopListInfo stopListInfo = new StopListInfo();
-	   	 stopListInfo.setComment("");
+	   	 stopListInfo.setComment("Комментарий");
 	   	 if ((DOC_SERIES_FOR_OK_STATUS.equals(request.getDocumentSeries()))) {
 	   	 stopListInfo.setStatus(StopListStatus.OK);
 	   	 } else if ((DOC_SERIES_FOR_STOP_STATUS.equals(request.getDocumentSeries()))) {
