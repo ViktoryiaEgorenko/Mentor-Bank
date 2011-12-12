@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.ExpectedException;
 
+import ru.mentorbank.backoffice.dao.exception.OperationDaoException;
 import ru.mentorbank.backoffice.model.transfer.AccountInfo;
 import ru.mentorbank.backoffice.model.transfer.TransferRequest;
 import ru.mentorbank.backoffice.services.accounts.AccountService;
@@ -36,15 +37,14 @@ public class MoneyTransferServiceFailsOnLowBalanceTest extends
 
 	@Test
 	@ExpectedException(TransferException.class)
-	public void transfer_failsWithUnsatisfiedBalance() throws TransferException {
-		// Закомментированный код показывает, как выглядел бы тест,
-		// если бы не было аннотации Expected Exception
+	public void transfer_failsWithUnsatisfiedBalance() throws TransferException, OperationDaoException {
+		// Р—Р°РєРѕРјРјРµРЅС‚РёСЂРѕРІР°РЅРЅС‹Р№ РєРѕРґ РїРѕРєР°Р·С‹РІР°РµС‚, РєР°Рє РІС‹РіР»СЏРґРµР» Р±С‹ С‚РµСЃС‚,
+		// РµСЃР»Рё Р±С‹ РЅРµ Р±С‹Р»Рѕ Р°РЅРЅРѕС‚Р°С†РёРё Expected Exception
 		// try {
 		// set up SUT
 		when(mockedAccountService.verifyBalance(lowBalancedAccount))
 				.thenReturn(false);
-		((MoneyTransferServiceBean) moneyTransferService)
-				.setAccountService(mockedAccountService);
+		((MoneyTransferServiceBean) moneyTransferService).setAccountService(mockedAccountService);
 		// call SUT
 		moneyTransferService.transfer(transferRequest);
 		// verify
